@@ -1,0 +1,7 @@
+name: SapphireQuest
+version: ${project.version}
+main: quest.quest.Core
+depend: [Vault]
+commands:
+  quest:
+    usage: /quest
