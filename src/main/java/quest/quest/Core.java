@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import quest.quest.quest1.Quest1;
 import quest.quest.quest2.Quest2;
+import quest.quest.quest3.Quest3;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,6 +34,9 @@ public final class Core extends JavaPlugin {
 
         Quest2 quest2 = new Quest2(manager, this, progress);
         Bukkit.getPluginManager().registerEvents(quest2, this);
+
+        Quest3 quest3 = new Quest3(manager, this, progress);
+        Bukkit.getPluginManager().registerEvents(quest3, this);
 
         Command command = new Command(manager);
         getCommand("quest").setExecutor(command);

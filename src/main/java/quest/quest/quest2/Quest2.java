@@ -31,7 +31,7 @@ public class Quest2 implements Listener {
         this.core = core;
         this.progress = progress;
 
-        about.add("Начало: найти местных");
+        about.add("Начало - найти местных");
         about.add("- " + ChatColor.GRAY + "Дойти до деревни (X: 125, Z: -208).");
         about.add("- " + ChatColor.GRAY + "Поговорить со старейшиной.");
         about.add("Награда: " + ChatColor.GRAY + "неизвестно" + ChatColor.GOLD + ".");
@@ -42,7 +42,7 @@ public class Quest2 implements Listener {
         Entity npc = e.getRightClicked();
         Player p = e.getPlayer();
 
-        if (npc.getLocation().getChunk().toString().equals("CraftChunk{x=-4z=14}")) {
+        if (npc.getLocation().getChunk().toString().equals("CraftChunk{x=-7z=0}")) {
             if (progress.isFinished(p, about.get(0))) {
                 sayAsUnknown(p, "Здравствуй.");
                 return;
@@ -73,17 +73,19 @@ public class Quest2 implements Listener {
             }.runTaskLater(core, 40);
             return;
         }
-        if (npc.getLocation().getChunk().toString().equals("CraftChunk{x=-4z=15}")) {
-            if (data.getQuest(p).get(0).equals(about.get(0))) {
-                data.finishQuest(p);
-                progress.saveQuest(p, about.get(0));
+        if (npc.getLocation().getChunk().toString().equals("CraftChunk{x=7z=-14}")) {
+            if (data.hasQuest(p)) {
+                if (data.getQuest(p).get(0).equals(about.get(0))) {
+                    data.finishQuest(p);
+                    progress.saveQuest(p, about.get(0));
+                    return;
+                }
+                p.sendMessage(ChatColor.RED + "У вас уже есть квест.");
                 return;
             }
-            if (progress.isFinished(p, about.get(0))) {
-                p.sendMessage(ChatColor.RED + "Продолжение квеста в разработке.");
-                return;
+            if (!progress.isFinished(p, about.get(0))) {
+                p.sendMessage(ChatColor.GOLD + "Старейшина: " + ChatColor.RESET + "Мы знакомы?");
             }
-            p.sendMessage(ChatColor.GOLD + "Старейшина: " + ChatColor.RESET + "Мы знакомы?");
         }
     }
 

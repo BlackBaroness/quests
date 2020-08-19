@@ -48,7 +48,7 @@ public class Quest1 implements Listener {
         if (data.hasQuest(p)) {
             if (data.getQuest(p).get(0).equals(about.get(0))) {
                 if (howMuchLog(p) >= 20) {
-                    removeItems(p.getInventory(), 20);
+                    removeItems(p.getInventory());
                     p.sendMessage(ChatColor.GOLD + "Незнакомец: " + ChatColor.RESET + "Спасибо тебе! Вовек твою доброту не забуду!");
                     new BukkitRunnable() {
                         @Override
@@ -134,7 +134,8 @@ public class Quest1 implements Listener {
         return number;
     }
 
-    void removeItems(Inventory inventory, int amount) {
+    void removeItems(Inventory inventory) {
+        int amount = 20;
         if (amount <= 0) return;
         int size = inventory.getSize();
         for (int slot = 0; slot < size; slot++) {
