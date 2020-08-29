@@ -16,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import quest.quest.Manager;
 import quest.quest.Progress;
+import ru.sapphirelife.SapphireMain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +29,13 @@ public class Quest3 implements Listener {
     private final Progress progress;
     private final String NPC2 = "CraftChunk{x=8z=-14}";
     final int delay = 70;
+    private final String doughMaterialAsString;
 
     public Quest3(Manager data, JavaPlugin core, Progress progress) {
         this.data = data;
         this.core = core;
         this.progress = progress;
+        doughMaterialAsString = SapphireMain.getInstance().getDough().getType().toString();
 
         about.add("Начало - помочь пекарю");
         about.add("- " + ChatColor.GRAY + "Найти пекаря.");
@@ -172,7 +175,7 @@ public class Quest3 implements Listener {
     private void craft(CraftItemEvent e) {
         Player p = (Player) e.getWhoClicked();
         if (data.hasQuest(p)) {
-            if (e.getCurrentItem().getType().toString().equals("SAPPHIREBREAD_TIESTO") && data.getQuest(p).equals(about) && p.getLocation().getChunk().toString().equals(NPC2)) {
+            if (e.getCurrentItem().getType().toString().equals(doughMaterialAsString) && data.getQuest(p).equals(about) && p.getLocation().getChunk().toString().equals(NPC2)) {
                 say2(p, "Хм, неплохое тесто получилось. ");
                 new BukkitRunnable() {
                     @Override
